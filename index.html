@@ -3,11 +3,16 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Portfolio</title>
-  <meta name="description" content="Personal portfolio">
+  <title>Khalid Saifullah — Environmental Researcher</title>
+  <meta name="description" content="Khalid Saifullah — environmental researcher and MEL professional working on climate adaptation, wetlands and river governance in Bangladesh.">
+  <meta property="og:title" content="Khalid Saifullah — Environmental Researcher">
+  <meta property="og:description" content="Climate adaptation, wetlands and river governance research in the Bengal Delta.">
+  <meta name="theme-color" content="#16201c">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%231f5a4e'/%3E%3Ctext x='32' y='43' font-family='Georgia,serif' font-size='30' fill='%23eef2ee' text-anchor='middle'%3EKS%3C/text%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fraunces:opsz,wght@9..144,400;9..144,500&display=swap" rel="stylesheet">
+  <link rel="preconnect" href="https://images.unsplash.com">
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Serif+Bengali:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,500;1,9..144,300;1,9..144,400&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
   <script>
     // Apply saved theme before paint to avoid a flash
@@ -20,14 +25,16 @@
 <body>
   <a class="skip" href="#main">Skip to content</a>
 
-  <header class="nav">
+  <header class="nav" id="nav">
     <div class="wrap nav-inner">
-      <a href="#top" class="brand" data-field="initials"></a>
+      <a href="#top" class="brand"><span class="brand-mark" data-field="initials"></span><span class="brand-name" data-field="name"></span></a>
       <nav aria-label="Main">
         <a href="#about">About</a>
         <a href="#interests">Research Interests</a>
         <a href="#publications">Publications</a>
         <a href="#experience">Experience</a>
+        <a href="#education">Education</a>
+        <a href="#awards">Awards</a>
         <a href="#contact">Contact</a>
       </nav>
       <button class="theme-toggle" type="button" aria-label="Toggle dark mode">
@@ -38,67 +45,166 @@
   </header>
 
   <main id="main">
-    <section id="top" class="hero wrap">
-      <p class="eyebrow" data-field="role"></p>
-      <h1 data-field="headline"></h1>
-      <p class="lede" data-field="intro"></p>
-      <div class="hero-actions">
-        <a class="btn btn-primary" href="#publications">View my research</a>
-        <a class="btn" href="#contact">Get in touch</a>
+    <!-- Hero -->
+    <section id="top" class="hero">
+      <div class="hero-media" aria-hidden="true"><img id="hero-img" alt="" fetchpriority="high"></div>
+      <div class="wrap hero-inner">
+        <p class="hero-eyebrow"><span class="pulse" aria-hidden="true"></span><span data-field="role"></span></p>
+        <h1 class="hero-title" id="hero-title"></h1>
+        <p class="hero-lede" data-field="intro"></p>
+        <div class="hero-actions">
+          <a class="btn btn-light" href="#publications">Read my research</a>
+          <a class="btn btn-ghost" href="#contact">Get in touch</a>
+        </div>
       </div>
-      <p class="status"><span class="dot" aria-hidden="true"></span><span data-field="availability"></span></p>
+      <a class="scroll-cue" href="#stats" aria-label="Scroll down"><span></span></a>
     </section>
 
+    <!-- Stats -->
+    <section id="stats" class="stats" aria-label="At a glance">
+      <div class="wrap stats-grid" id="stats-list"></div>
+    </section>
+
+    <!-- About -->
     <section id="about" class="about-band">
       <div class="wrap about-feature">
-        <div class="portrait">
+        <div class="portrait reveal">
           <div class="portrait-shapes" aria-hidden="true">
             <span class="shape shape-top"></span>
             <span class="shape shape-bottom"></span>
           </div>
           <img class="portrait-photo" id="portrait-photo" alt="" hidden>
           <span class="portrait-fallback" data-field="initials" aria-hidden="true"></span>
+          <p class="portrait-tag"><span data-field="location"></span></p>
         </div>
-        <div class="about-copy">
-          <p class="about-eyebrow" data-field="aboutEyebrow"></p>
+        <div class="about-copy reveal">
+          <p class="kicker" data-field="aboutEyebrow"></p>
           <h2 class="about-name" data-field="name"></h2>
           <p class="about-tagline" data-field="aboutTagline"></p>
           <div class="about-text" id="about-text"></div>
+          <div class="partners">
+            <span class="partners-label">Worked with</span>
+            <ul id="partners"></ul>
+          </div>
         </div>
       </div>
     </section>
 
-    <section id="interests" class="wrap section">
-      <h2 class="section-title">Research interests</h2>
-      <ul class="interests reveal" id="interests-list"></ul>
+    <!-- Research interests -->
+    <section id="interests" class="section">
+      <div class="wrap interests-layout">
+        <div>
+          <p class="kicker">Research interests</p>
+          <h2 class="section-heading">What I study, and <em>why it matters</em></h2>
+          <ul class="interests" id="interests-list"></ul>
+        </div>
+        <figure class="interests-figure reveal">
+          <img id="interests-img" alt="A lone tree standing in still floodwater" loading="lazy">
+        </figure>
+      </div>
     </section>
 
-    <section id="publications" class="wrap section">
-      <h2 class="section-title">Publications</h2>
-      <div class="projects" id="projects"></div>
+    <!-- Publications -->
+    <section id="publications" class="section section-alt">
+      <div class="wrap">
+        <div class="section-head">
+          <div>
+            <p class="kicker">Publications</p>
+            <h2 class="section-heading">Reports &amp; <em>research</em></h2>
+          </div>
+          <a class="link-arrow" href="https://rdrc.info/publications" target="_blank" rel="noopener">All RDRC publications <span aria-hidden="true">↗</span></a>
+        </div>
+        <div class="pubs" id="projects"></div>
+      </div>
     </section>
 
-    <section id="experience" class="wrap section">
-      <h2 class="section-title">Experience &amp; education</h2>
-      <ol class="timeline" id="experience-list"></ol>
+    <!-- Quote band -->
+    <section class="quote-band" aria-label="Quote">
+      <div class="quote-media" aria-hidden="true"><img id="quote-img" alt="" loading="lazy"></div>
+      <div class="wrap quote-inner reveal">
+        <blockquote>
+          <p data-field="quote"></p>
+          <footer>— <span data-field="name"></span></footer>
+        </blockquote>
+      </div>
     </section>
 
-    <section id="fieldwork" class="wrap section">
-      <h2 class="section-title">Field research</h2>
-      <ol class="timeline" id="fieldwork-list"></ol>
+    <!-- Experience -->
+    <section id="experience" class="section">
+      <div class="wrap">
+        <p class="kicker">Experience</p>
+        <h2 class="section-heading">Where I've <em>worked</em></h2>
+        <ol class="timeline" id="experience-list"></ol>
+      </div>
     </section>
 
-    <section id="contact" class="wrap section contact">
-      <h2 class="section-title">Contact</h2>
-      <p class="contact-lede">Have a project in mind or just want to say hello?</p>
-      <a class="contact-email" id="email-link" href="#"></a>
-      <ul class="socials" id="socials"></ul>
+    <!-- Featured project -->
+    <section id="project" class="section section-alt">
+      <div class="wrap">
+        <div class="project-head">
+          <p class="kicker">Featured project · <span data-project="name"></span></p>
+          <h2 class="section-heading project-title" data-project="title"></h2>
+        </div>
+        <div class="project-grid">
+          <figure class="project-main reveal"><img id="project-img-1" alt="" loading="lazy"><figcaption id="project-cap-1"></figcaption></figure>
+          <div class="project-side">
+            <p class="project-desc reveal" data-project="description"></p>
+            <dl class="project-facts reveal" id="project-facts"></dl>
+            <a class="project-link" id="project-link" target="_blank" rel="noopener" hidden></a>
+            <figure class="project-second reveal"><img id="project-img-2" alt="" loading="lazy"><figcaption id="project-cap-2"></figcaption></figure>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Education -->
+    <section id="education" class="section">
+      <div class="wrap">
+        <p class="kicker">Education</p>
+        <h2 class="section-heading">Where I <em>studied</em></h2>
+        <div class="edu-grid" id="education-list"></div>
+      </div>
+    </section>
+
+    <!-- Awards -->
+    <section id="awards" class="awards">
+      <div class="wrap awards-inner">
+        <div class="awards-head">
+          <p class="kicker kicker-light">Awards &amp; fellowships</p>
+          <h2 class="section-heading awards-heading">Recognition for <em>the research</em></h2>
+        </div>
+        <div class="awards-list" id="awards-list"></div>
+      </div>
+    </section>
+
+    <!-- Field research -->
+    <section id="fieldwork" class="section section-alt">
+      <div class="wrap">
+        <p class="kicker">Field research</p>
+        <h2 class="section-heading">From the <em>mangroves to the coast</em></h2>
+        <div class="field-grid" id="fieldwork-list"></div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="contact">
+      <div class="contact-media" aria-hidden="true"><img id="contact-img" alt="" loading="lazy"></div>
+      <div class="wrap contact-inner reveal">
+        <p class="kicker kicker-light">Contact</p>
+        <h2 class="contact-title">Let's work on <em>evidence that matters.</em></h2>
+        <p class="contact-lede">Open to research collaborations, MEL roles and consultancy on climate adaptation, wetlands and water governance.</p>
+        <a class="contact-email" id="email-link" href="#"></a>
+        <ul class="socials" id="socials"></ul>
+      </div>
     </section>
   </main>
 
-  <footer class="wrap footer">
-    <p>&copy; <span id="year"></span> <span data-field="name"></span></p>
-    <a href="#top">Back to top &uarr;</a>
+  <footer class="footer">
+    <div class="wrap footer-inner">
+      <p>&copy; <span id="year"></span> <span data-field="name"></span> · <span data-field="location"></span></p>
+      <p class="credit">Photography from <a href="https://unsplash.com" target="_blank" rel="noopener">Unsplash</a></p>
+      <a href="#top">Back to top ↑</a>
+    </div>
   </footer>
 
   <script src="content.js"></script>
